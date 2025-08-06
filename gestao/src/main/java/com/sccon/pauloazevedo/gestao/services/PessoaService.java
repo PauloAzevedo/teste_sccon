@@ -12,28 +12,23 @@ import com.sccon.pauloazevedo.gestao.strategy.TempoDeVidaDias;
 import com.sccon.pauloazevedo.gestao.strategy.TempoDeVidaMeses;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
 import static com.sccon.pauloazevedo.gestao.enums.TipoSalarioEnum.MIN;
+import static com.sccon.pauloazevedo.gestao.utils.GestaoConstants.*;
 
 @Service
 public class PessoaService {
 
-    private final String MENSAGEM_CONFLITO = "Pessoa com ID já cadastrado.";
-    private final String MENSAGEM_PESSOA_NAO_ENCONTRADA = "Pessoa não encontrada.";
-    private final Double SALARIO_BASE = 1558.00;
-    private final Double SALARIO_MINIMO = 1302.00;
-    private final Double PERCENTUAL_ACRESCIMO = 0.18;
-    private final Double BONUS_ACRESCIMO = 500.00;
-
     private final PessoaRepository pessoaRepository;
 
-    public PessoaService(PessoaRepository pessoaRepository) {
+    private final SalarioService salarioService;
+
+    public PessoaService(PessoaRepository pessoaRepository, SalarioService salarioService) {
         this.pessoaRepository = pessoaRepository;
+        this.salarioService = salarioService;
     }
 
     public List<Pessoa> listaPessoas(){
@@ -101,7 +96,7 @@ public class PessoaService {
         try {
             return TempoEnum.valueOf(output.toUpperCase());
         } catch (Exception e) {
-            throw new BadRequestPersonalizada("Output deve ser uma das opções: days, months, years");
+            throw new BadRequestPersonalizada(MENSAGEM_BAD_REQUEST_TEMPO);
         }
     }
 
@@ -115,41 +110,17 @@ public class PessoaService {
 
 
     public Double salarioPessoa(Integer id, String output ){
-        TipoSalarioEnum tipoSalarioEnum = validaTipoSalarioEnum(output);
+        TipoSalarioEnum tipoSalarioEnum = salarioService.validaTipoSalarioEnum(output);
         var pessoaDB = detalhaPessoa(id);
         var tempoServico = tempoAtual(pessoaDB.getDataDeAdmissao(), TempoEnum.YEARS);
-        var valorSalario = calculaSalarioFull(tempoServico, SALARIO_BASE);
+        var valorSalario = salarioService.calculaSalarioFull(tempoServico, SALARIO_BASE);
         if (tipoSalarioEnum == MIN) {
-            valorSalario = calcularSalarioMinimo(valorSalario);
+            valorSalario = salarioService.calcularSalarioMinimo(valorSalario);
         }
-        return arredondarValor(valorSalario);
-    }
-
-    public TipoSalarioEnum validaTipoSalarioEnum(String output) {
-        try {
-            return TipoSalarioEnum.valueOf(output.toUpperCase());
-        } catch (Exception e) {
-            throw new BadRequestPersonalizada("Output deve ser uma das opções: min, full");
-        }
-    }
-
-    public Double calculaSalarioFull(Integer tempoServico, Double valorSalario) {
-        int controle = 0;
-        while(controle < tempoServico){
-            valorSalario = valorSalario + ((valorSalario * PERCENTUAL_ACRESCIMO) +  BONUS_ACRESCIMO);
-            controle++;
-        }
-        return valorSalario;
-    }
-
-    public Double calcularSalarioMinimo(Double valorSalario){
-        return valorSalario / SALARIO_MINIMO;
+        return salarioService.arredondarValor(valorSalario);
     }
 
 
-    public Double arredondarValor(Double valor){
-        return new BigDecimal(valor).setScale(2, RoundingMode.CEILING).doubleValue();
-    }
 
 
 }
