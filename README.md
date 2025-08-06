@@ -23,3 +23,6 @@ Para rodar os testes de integração, segue o comando:
 ## mvn clean test
 
 # Também disponibilizei uma collection do Insomnia onde usei para testar os endpoints.
+
+
+<img width="1153" height="834" alt="image" src="https://github.com/user-attachments/assets/571347e2-74fb-4b34-bd30-59445baeb351" />
