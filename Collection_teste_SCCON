@@ -1,0 +1,262 @@
+type: collection.insomnia.rest/5.0
+name: Teste SCCON
+meta:
+  id: wrk_14f937edce7541ff901063aa2ed50fe1
+  created: 1754422068751
+  modified: 1754422068751
+  description: ""
+collection:
+  - url: http://localhost:8080/person
+    name: Lista Pessoas
+    meta:
+      id: req_9ca80d80c38f4bb39b4b7cfb3c0475cb
+      created: 1754422073363
+      modified: 1754486732175
+      isPrivate: false
+      description: ""
+      sortKey: -1754422073363
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person
+    name: Cria Pessoa Sem ID
+    meta:
+      id: req_d792c47ad4534a4aa293531379f86c68
+      created: 1754422162920
+      modified: 1754488597635
+      isPrivate: false
+      description: ""
+      sortKey: -1753941929192
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"nome": "GIlson Azevedo",
+        		"dataDeNascimento": "24/02/2005",
+        		"dataDeAdmissao": "05/12/2021"
+        	}
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person
+    name: Cria Pessoa Com ID
+    meta:
+      id: req_f18810b3a7304c70a868e1f6ccc9bc39
+      created: 1754422177633
+      modified: 1754490466086
+      isPrivate: false
+      description: ""
+      sortKey: -1753701857106.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"id": 78,
+        		"nome": "Cassandra 0",
+        		"dataDeNascimento": "24/02/2010",
+        		"dataDeAdmissao": "02/01/2024"
+        	}
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person/4
+    name: Delete Pessoa
+    meta:
+      id: req_7f50f3f2c019463798e97143d355e982
+      created: 1754424076805
+      modified: 1754502412898
+      isPrivate: false
+      description: ""
+      sortKey: -1753671848095.8125
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person/2
+    name: Atualiza Pessoa
+    meta:
+      id: req_dda1ac7c13554207b7dd9102b67e6ba0
+      created: 1754424593697
+      modified: 1754500884107
+      isPrivate: false
+      description: ""
+      sortKey: -1753641839085.125
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"id": 2,
+        		"nome": "Paulo Azevedo",
+        		"dataDeNascimento": "22/05/1988",
+        		"dataDeAdmissao": "02/01/2025"
+        	}
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person/3
+    name: Atualiza Apenas Nome Pessoa
+    meta:
+      id: req_041cdf7fb6f047fdb3997430adc79489
+      created: 1754424772947
+      modified: 1754487791442
+      isPrivate: false
+      description: ""
+      sortKey: -1753551812053.0625
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        		"nome": "Ana Maria Braga"
+        	}
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person/3
+    name: Detalha Pessoa
+    meta:
+      id: req_e4d2205da8364fecb6fab076eb2c8813
+      created: 1754426112409
+      modified: 1754490446884
+      isPrivate: false
+      description: ""
+      sortKey: -1753506798537.0312
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person/78/age
+    name: Idade Pessoa
+    meta:
+      id: req_a483c34103c4400c999378431f9ae543
+      created: 1754428187702
+      modified: 1754502424999
+      isPrivate: false
+      description: ""
+      sortKey: -1753484291779.0156
+    method: GET
+    parameters:
+      - id: pair_f3a5701875054b8e9e3230e07d06d3a7
+        name: output
+        value: years
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/person/78/salary
+    name: Salario Pessoa
+    meta:
+      id: req_3c3ffcfdc3d24b93abd6e5740c943c04
+      created: 1754485089039
+      modified: 1754502441363
+      isPrivate: false
+      description: ""
+      sortKey: -1753473038400.0078
+    method: GET
+    parameters:
+      - id: pair_f3a5701875054b8e9e3230e07d06d3a7
+        name: output
+        value: full
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_55c16e4e58e22e6f89b6b13c0c9b51fe64469e50
+    created: 1754422068773
+    modified: 1754422068773
+environments:
+  name: Base Environment
+  meta:
+    id: env_55c16e4e58e22e6f89b6b13c0c9b51fe64469e50
+    created: 1754422068768
+    modified: 1754422068768
+    isPrivate: false
