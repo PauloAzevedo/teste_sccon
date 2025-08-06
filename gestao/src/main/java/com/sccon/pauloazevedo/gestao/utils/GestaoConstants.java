@@ -12,6 +12,6 @@ public class GestaoConstants {
     public static final Double SALARIO_MINIMO = 1302.00;
     public static final Double PERCENTUAL_ACRESCIMO = 0.18;
     public static final Double BONUS_ACRESCIMO = 500.00;
-    public static final LocalDate DIA_REFERENCIA = LocalDate.of(2023,2,7);
+    public static final LocalDate DIA_REFERENCIA = LocalDate.now();
 
 }
